@@ -1,30 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-[SerializeField]
-public struct RotateInfo
-{
-    public Axis axis;
-    public int num;
-}
-
 public class CubeRotator : SerializedMonoBehaviour
 {
     [OdinSerialize] public Dictionary<KeyCode, RotateInfo> rotateButton = new Dictionary<KeyCode, RotateInfo>();
     [SerializeField] private RubicGenerator generator;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         foreach (var button in rotateButton)
