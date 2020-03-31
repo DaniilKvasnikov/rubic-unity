@@ -9,6 +9,9 @@ public class CubeRotator : SerializedMonoBehaviour
 {
     [OdinSerialize] public Dictionary<KeyCode, RotateInfo> rotateButton = new Dictionary<KeyCode, RotateInfo>();
     [SerializeField] private RubicGenerator generator;
+    [SerializeField] private float TOLERANCE = .1f;
+    
+    private int angle = 90;
     
     void Update()
     {
@@ -24,25 +27,21 @@ public class CubeRotator : SerializedMonoBehaviour
     private void ButtonPress(RotateInfo info)
     {
         Vector3 center = new Vector3(1, 1, 1);
-        Vector3 xAxis = new Vector3(1, 0, 0);
-        Vector3 yAxis = new Vector3(0, 1, 0);
-        Vector3 zAxis = new Vector3(0, 0, 1);
-        int angle = 90;
-        foreach (var cube in generator.cubes)
+        foreach (var cube in generator.cubeElements)
         {
             switch (info.axis)
             {
                 case Axis.X:
-                    if (cube.transform.position.x == info.num)
-                        cube.transform.RotateAround(center, xAxis, angle);
+                    if (Math.Abs(cube.transform.position.x - info.num) < TOLERANCE)
+                        cube.transform.RotateAround(center, Vector3.right, angle);
                     break;
                 case Axis.Y:
-                    if (cube.transform.position.y == info.num)
-                        cube.transform.RotateAround(center, yAxis, angle);
+                    if (Math.Abs(cube.transform.position.y - info.num) < TOLERANCE)
+                        cube.transform.RotateAround(center, Vector3.up, angle);
                     break;
                 case Axis.Z:
-                    if (cube.transform.position.z == info.num)
-                        cube.transform.RotateAround(center, zAxis, angle);
+                    if (Math.Abs(cube.transform.position.z - info.num) < TOLERANCE)
+                        cube.transform.RotateAround(center, Vector3.forward, angle);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
