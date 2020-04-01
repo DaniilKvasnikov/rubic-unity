@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -7,15 +8,13 @@ namespace Rubik
 {
     public class RubikCube
     {
-        public RubikColor[] Cube;
+        public RubikInfo[] Cube;
         private int countElementsRubik = 6 * 9;
-
-
-        
+        public static string Commands = "FURBLD";
 
         public RubikCube()
         {
-            Cube = new RubikColor[countElementsRubik];
+            Cube = new RubikInfo[countElementsRubik];
             CubeInitialization();
         }
 
@@ -35,6 +34,17 @@ namespace Rubik
         public void Reset()
         {
             CubeInitialization();
+        }
+
+        public bool IsCorrect()
+        {
+            for (int i = 0; i < Cube.Length - 1; i++)
+            {
+                if (Cube[i].num > Cube[i + 1].num)
+                    return false;
+            }
+
+            return true;
         }
 
         public void Front(bool reverse)
@@ -207,7 +217,7 @@ namespace Rubik
         {
             for (int i = 0; i < countElementsRubik; i++)
             {
-                Cube[i] = GetColorByInt(i / 9);
+                Cube[i] = new RubikInfo(GetColorByInt(i / 9), i);
             }
         }
 
@@ -246,7 +256,7 @@ namespace Rubik
 
         private bool IsCommands(char command)
         {
-            return "FURBLD".Contains(command.ToString());
+            return Commands.Contains(command.ToString());
         }
 
         private void UseCommand(char command, bool reverse)
@@ -281,7 +291,7 @@ namespace Rubik
             string cube = "";
             foreach (var color in Cube)
             {
-                cube += color.ToString()[0];
+                cube += color.color.ToString()[0];
             }
 
             return cube;
