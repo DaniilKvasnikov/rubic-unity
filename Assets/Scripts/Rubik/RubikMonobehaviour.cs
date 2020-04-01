@@ -5,6 +5,7 @@ using Rubik;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class RubikMonobehaviour : SerializedMonoBehaviour
 {
@@ -42,9 +43,25 @@ public class RubikMonobehaviour : SerializedMonoBehaviour
         DrawCube();
     }
 
+
+    [Button]
+    public void RandomCommand(int len)
+    {
+        var newCommand = "";
+        for (int i = 0; i < len; i++)
+        {
+            char randomCommand = RubikCube.Commands[Random.Range(0, RubikCube.Commands.Length - 1)];
+            bool reverse = Random.Range(0, 1) == 1;
+            newCommand += randomCommand + (reverse ? "\'" : "");
+        }
+
+        command = newCommand;
+    }
+
     private void DrawCube()
     {
         string rubik = rubikCube.ToString();
+        Debug.Log(rubik);
         for (int i = 0; i < 6; i++)
         {
             Debug.Log(rubik.Substring(i * 9, 9));
