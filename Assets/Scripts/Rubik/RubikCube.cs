@@ -7,16 +7,34 @@ namespace Rubik
 {
     public class RubikCube
     {
-        public List<RubikColor> Cube;
+        public RubikColor[] Cube;
+        private int countElementsRubik = 6 * 9;
 
 
         
 
-        public RubikCube(string commands)
+        public RubikCube()
         {
-            Cube = CubeInitialization();
+            Cube = new RubikColor[countElementsRubik];
+            CubeInitialization();
+        }
+
+        public void UseCommands(string commands)
+        {
             CheckCommands(commands);
-            UseCommands(commands);
+            for (var i = 0; i < commands.Length; i++)
+            {
+                var command = commands[i];
+                var reverse = i + 1 < commands.Length && commands[i + 1] == '\'';
+                UseCommand(command, reverse);
+                if (reverse)
+                    i++;
+            }
+        }
+
+        public void Reset()
+        {
+            CubeInitialization();
         }
 
         public void Front(bool reverse)
@@ -185,16 +203,12 @@ namespace Rubik
             Cube[to] = tmp;
         }
 
-        private List<RubikColor> CubeInitialization()
+        private void CubeInitialization()
         {
-            var cube = new List<RubikColor>();
-            int countElementsRubik = 6 * 9;
             for (int i = 0; i < countElementsRubik; i++)
             {
-                cube.Add(GetColorByInt(i / 9));
+                Cube[i] = GetColorByInt(i / 9);
             }
-
-            return cube;
         }
 
         private RubikColor GetColorByInt(int i)
@@ -233,18 +247,6 @@ namespace Rubik
         private bool IsCommands(char command)
         {
             return "FURBLD".Contains(command.ToString());
-        }
-
-        private void UseCommands(string commands)
-        {
-            for (var i = 0; i < commands.Length; i++)
-            {
-                var command = commands[i];
-                var reverse = i + 1 < commands.Length && commands[i + 1] == '\'';
-                UseCommand(command, reverse);
-                if (reverse)
-                    i++;
-            }
         }
 
         private void UseCommand(char command, bool reverse)

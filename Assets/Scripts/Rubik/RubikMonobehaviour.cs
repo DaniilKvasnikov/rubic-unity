@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Rubik;
 using Sirenix.OdinInspector;
@@ -8,23 +9,41 @@ using UnityEngine.UI;
 public class RubikMonobehaviour : SerializedMonoBehaviour
 {
     [SerializeField] private string command;
+    [SerializeField] private string decision;
     [SerializeField] private Image[] images;
-    [SerializeField] private Color White;
-    [SerializeField] private Color Orange;
-    [SerializeField] private Color Green;
-    [SerializeField] private Color Red;
-    [SerializeField] private Color Blue;
-    [SerializeField] private Color Yellow;
+    [SerializeField] private Color up = Color.white;
+    [SerializeField] private Color left = Color.white;
+    [SerializeField] private Color front = Color.white;
+    [SerializeField] private Color right = Color.white;
+    [SerializeField] private Color back = Color.white;
+    [SerializeField] private Color down = Color.white;
+
+
+    private RubikCube rubikCube = new RubikCube();
     
-    private void OnEnable()
+    [Button]
+    public void ResetCube()
     {
-        CreateRubik();
+        rubikCube.Reset();
+        DrawCube();
     }
 
     [Button]
-    private void CreateRubik()
+    private void MixUpCube()
     {
-        RubikCube rubikCube = new RubikCube(command);
+        rubikCube.UseCommands(CorrectCommand(command));
+        DrawCube();
+    }
+
+    [Button]
+    private void UseDecision()
+    {
+        rubikCube.UseCommands(CorrectCommand(decision));
+        DrawCube();
+    }
+
+    private void DrawCube()
+    {
         string rubik = rubikCube.ToString();
         for (int i = 0; i < 6; i++)
         {
@@ -34,19 +53,31 @@ public class RubikMonobehaviour : SerializedMonoBehaviour
         {
             Color color = Color.black;
             if (rubik[i] == 'W')
-                color = White;
+                color = up;
             else if (rubik[i] == 'O')
-                color = Orange;
+                color = left;
             else if (rubik[i] == 'G')
-                color = Green;
+                color = front;
             else if (rubik[i] == 'R')
-                color = Red;
+                color = right;
             else if (rubik[i] == 'B')
-                color = Blue;
+                color = back;
             else if (rubik[i] == 'Y')
-                color = Yellow;
+                color = down;
 
             images[i].color = color;
         }
+    }
+
+    private string CorrectCommand(string command)
+    {
+        command = command.Replace(" ", "");
+        if (command.Length == 0) return command;
+        string newCommand = command[0].ToString();
+        for (int i = 1; i < command.Length; i++)
+        {
+            newCommand += command[i] != '2' ? command[i] : command[i - 1];
+        }
+        return newCommand;
     }
 }
