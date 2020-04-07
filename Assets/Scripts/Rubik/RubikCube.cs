@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,6 +17,12 @@ namespace Rubik
         {
             Cube = new RubikInfo[countElementsRubik];
             CubeInitialization();
+        }
+
+        public RubikCube(RubikCube copy)
+        {
+            Cube = new RubikInfo[countElementsRubik];
+            CubeInitialization(copy.Cube);
         }
 
         public void UseCommands(string commands)
@@ -47,7 +54,9 @@ namespace Rubik
             return true;
         }
 
-        public void Front(bool reverse)
+        #region Rotate
+
+        private void Front(bool reverse)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
 
@@ -67,8 +76,8 @@ namespace Rubik
 
             RotateFace(listRotate, reverse);
         }
-        
-        public void Up(bool reverse)
+
+        private void Up(bool reverse)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
 
@@ -88,8 +97,8 @@ namespace Rubik
 
             RotateFace(listRotate, reverse);
         }
-        
-        public void Right(bool reverse)
+
+        private void Right(bool reverse)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
 
@@ -109,8 +118,8 @@ namespace Rubik
 
             RotateFace(listRotate, reverse);
         }
-        
-        public void Back(bool reverse)
+
+        private void Back(bool reverse)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
 
@@ -130,8 +139,8 @@ namespace Rubik
 
             RotateFace(listRotate, reverse);
         }
-        
-        public void Left(bool reverse)
+
+        private void Left(bool reverse)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
 
@@ -151,8 +160,8 @@ namespace Rubik
 
             RotateFace(listRotate, reverse);
         }
-        
-        public void Down(bool reverse)
+
+        private void Down(bool reverse)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
 
@@ -172,9 +181,7 @@ namespace Rubik
 
             RotateFace(listRotate, reverse);
         }
-
-        #region Private functions
-
+        
         private List<(int fromLayer, int fromNum, int toLayer, int toNum)> GetFaceRotateList(int faceNum)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
@@ -197,27 +204,39 @@ namespace Rubik
             var delta = reverse ? -1 : 1;
             for (var i = from; i != to; i += delta)
             {
-                swap(listRotate[i].fromLayer, listRotate[i].fromNum, listRotate[i].toLayer, listRotate[i].toNum);
+                Swap(listRotate[i].fromLayer, listRotate[i].fromNum, listRotate[i].toLayer, listRotate[i].toNum);
             }
         }
 
-        private void swap(int fromLayer, int fromNum, int toLayer, int toNum)
+        private void Swap(int fromLayer, int fromNum, int toLayer, int toNum)
         {
-            swap(fromLayer * 9 + fromNum, toLayer * 9 + toNum);
+            Swap(fromLayer * 9 + fromNum, toLayer * 9 + toNum);
         }
 
-        private void swap(int from, int to)
+        private void Swap(int from, int to)
         {
             var tmp = Cube[from];
             Cube[from] = Cube[to];
             Cube[to] = tmp;
         }
 
+        #endregion
+
+        #region Private functions
+
         private void CubeInitialization()
         {
             for (int i = 0; i < countElementsRubik; i++)
             {
                 Cube[i] = new RubikInfo(GetColorByInt(i / 9), i);
+            }
+        }
+
+        private void CubeInitialization(RubikInfo[] copy)
+        {
+            for (int i = 0; i < countElementsRubik; i++)
+            {
+                Cube[i] = new RubikInfo(copy[i]);
             }
         }
 
@@ -246,11 +265,11 @@ namespace Rubik
             for (int i = 0; i < commands.Length; i++)
             {
                 if (commands[i] != '\'' && !IsCommands(commands[i]))
-                    throw new Exception("Unknown command " + commands[i] + " use [FURBLD]");
+                    throw new Exception("Unknown command " + commands[i] + " use " + Commands);
                 if (commands[i] == '\'' && i == 0)
                     throw new Exception("\' cant be first ");
                 if (commands[i] == '\'' && !IsCommands(commands[i - 1]))
-                    throw new Exception("\' must be under [FURBLD]");
+                    throw new Exception("\' must be under " + Commands);
             }
         }
 
@@ -296,5 +315,19 @@ namespace Rubik
 
             return cube;
         }
+
+        #region Heuristic
+
+        public float Heuristic()
+        {
+            return HeuristicNotOnPlace();
+        }
+
+        private float HeuristicNotOnPlace()
+        {
+            return Cube.Select((t, i) => (t.num != i ? 1 : 0)).Sum();
+        }
+
+        #endregion
     }
 }
