@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
-using Rubik;
 using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 
 public class RubikIda : MonoBehaviour
 {
     private float Found { get; } = float.NaN;
-
+    
     private bool IsFound(float t)
     {
         return float.IsNaN(t);
     }
-
+    
     [SerializeField] private Rubik.Rubik rubik;
 
     [Button]
@@ -23,7 +23,7 @@ public class RubikIda : MonoBehaviour
         Debug.Log(idaResults.Value.bound);
         foreach (var node1 in idaResults.Value.path)
         {
-            Debug.Log(node1);
+            Debug.Log(node1.Command());
         }
     }
 
@@ -31,6 +31,7 @@ public class RubikIda : MonoBehaviour
     {
         var bound = root.Heuristic();
         var path = new Stack<Node>();
+        path.Push(root);
         while (true)
         {
             var t = Search(path, 0f, bound);
@@ -56,56 +57,12 @@ public class RubikIda : MonoBehaviour
             if (t < min) min = t;
             path.Pop();
         }
-
+    
         return min;
     }
-
+    
     private float Cost(Node node, Node successor)
     {
         return 1f;
-    }
-}
-
-internal class Node
-{
-    private readonly RubikCube rubik;
-
-    public Node(RubikCube rubik)
-    {
-        this.rubik = rubik;
-    }
-
-    public IEnumerable<Node> Successors()
-    {
-        var list = new List<Node>();
-        foreach (var command in RubikCube.Commands)
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                bool reverse = i == 1;
-                string commandString = command + (reverse ? "\'" : "");
-                RubikCube rubikCube = new RubikCube(rubik);
-                rubikCube.UseCommands(commandString);
-                var node = new Node(rubikCube);
-                list.Add(node);
-            }
-        }
-
-        return list;
-    }
-
-    public bool IsGoal()
-    {
-        return rubik.IsCorrect();
-    }
-
-    public float Heuristic()
-    {
-        return rubik.Heuristic();
-    }
-
-    public override string ToString()
-    {
-        return rubik.ToString();
     }
 }

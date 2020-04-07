@@ -10,6 +10,8 @@ namespace Rubik
         private int countElementsRubik = 6 * 9;
         public static string Commands = "FURBLD";
 
+        private string command = "";
+
         public RubikCube()
         {
             Cube = new RubikInfo[countElementsRubik];
@@ -20,16 +22,18 @@ namespace Rubik
         {
             Cube = new RubikInfo[countElementsRubik];
             CubeInitialization(copy.Cube);
+            command = copy.Command();
         }
 
         public void UseCommands(string commands)
         {
             CheckCommands(commands);
+            command += commands;
             for (var i = 0; i < commands.Length; i++)
             {
-                var command = commands[i];
+                var useCommand = commands[i];
                 var reverse = i + 1 < commands.Length && commands[i + 1] == '\'';
-                UseCommand(command, reverse);
+                UseCommand(useCommand, reverse);
                 if (reverse)
                     i++;
             }
@@ -326,5 +330,10 @@ namespace Rubik
         }
 
         #endregion
+
+        public string Command()
+        {
+            return command;
+        }
     }
 }
