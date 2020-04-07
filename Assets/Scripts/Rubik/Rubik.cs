@@ -16,10 +16,12 @@ namespace Rubik
         [SerializeField] private Color right = Color.white;
         [SerializeField] private Color back = Color.white;
         [SerializeField] private Color down = Color.white;
-
-
+        
         [HideInInspector] public RubikCube rubikCube = new RubikCube();
-    
+        
+        public string Command => command;
+        public string Decision { get=> decision; set => decision = value; }
+
         [Button]
         public void ResetCube()
         {
@@ -30,14 +32,16 @@ namespace Rubik
         [Button]
         private void MixUpCube()
         {
-            rubikCube.UseCommands(CorrectCommand(command));
+            ResetCube();
+            rubikCube.UseCommand(CorrectCommand(command));
             DrawCube();
         }
 
         [Button]
         private void UseDecision()
         {
-            rubikCube.UseCommands(CorrectCommand(decision));
+            MixUpCube();
+            rubikCube.UseDecision(CorrectCommand(decision));
             DrawCube();
         }
 
