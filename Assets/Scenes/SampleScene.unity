@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.64705884, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.4666667, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.86666673, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -683,7 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.86666673, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.64705884, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1327,7 +1327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.86666673, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1420,10 +1420,10 @@ MonoBehaviour:
       Data: 4|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: num
       Entry: 3
-      Data: 2
+      Data: 18
     - Name: 
       Entry: 8
       Data: 
@@ -1456,10 +1456,10 @@ MonoBehaviour:
       Data: 7|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: num
       Entry: 3
-      Data: 5
+      Data: 19
     - Name: 
       Entry: 8
       Data: 
@@ -1471,7 +1471,7 @@ MonoBehaviour:
       Data: 0
     - Name: num
       Entry: 3
-      Data: 6
+      Data: 8
     - Name: 
       Entry: 8
       Data: 
@@ -1480,10 +1480,10 @@ MonoBehaviour:
       Data: 9|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: num
       Entry: 3
-      Data: 7
+      Data: 34
     - Name: 
       Entry: 8
       Data: 
@@ -1492,10 +1492,10 @@ MonoBehaviour:
       Data: 10|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: num
       Entry: 3
-      Data: 8
+      Data: 35
     - Name: 
       Entry: 8
       Data: 
@@ -1528,10 +1528,10 @@ MonoBehaviour:
       Data: 13|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: num
       Entry: 3
-      Data: 11
+      Data: 20
     - Name: 
       Entry: 8
       Data: 
@@ -1612,10 +1612,10 @@ MonoBehaviour:
       Data: 20|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 2
+      Data: 3
     - Name: num
       Entry: 3
-      Data: 18
+      Data: 27
     - Name: 
       Entry: 8
       Data: 
@@ -1624,10 +1624,10 @@ MonoBehaviour:
       Data: 21|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 2
+      Data: 5
     - Name: num
       Entry: 3
-      Data: 19
+      Data: 50
     - Name: 
       Entry: 8
       Data: 
@@ -1636,10 +1636,10 @@ MonoBehaviour:
       Data: 22|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 2
+      Data: 5
     - Name: num
       Entry: 3
-      Data: 20
+      Data: 53
     - Name: 
       Entry: 8
       Data: 
@@ -1720,10 +1720,10 @@ MonoBehaviour:
       Data: 29|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 3
+      Data: 4
     - Name: num
       Entry: 3
-      Data: 27
+      Data: 42
     - Name: 
       Entry: 8
       Data: 
@@ -1732,10 +1732,10 @@ MonoBehaviour:
       Data: 30|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 3
+      Data: 0
     - Name: num
       Entry: 3
-      Data: 28
+      Data: 7
     - Name: 
       Entry: 8
       Data: 
@@ -1744,10 +1744,10 @@ MonoBehaviour:
       Data: 31|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 3
+      Data: 0
     - Name: num
       Entry: 3
-      Data: 29
+      Data: 6
     - Name: 
       Entry: 8
       Data: 
@@ -1783,7 +1783,7 @@ MonoBehaviour:
       Data: 3
     - Name: num
       Entry: 3
-      Data: 32
+      Data: 28
     - Name: 
       Entry: 8
       Data: 
@@ -1807,7 +1807,7 @@ MonoBehaviour:
       Data: 3
     - Name: num
       Entry: 3
-      Data: 34
+      Data: 32
     - Name: 
       Entry: 8
       Data: 
@@ -1819,7 +1819,7 @@ MonoBehaviour:
       Data: 3
     - Name: num
       Entry: 3
-      Data: 35
+      Data: 29
     - Name: 
       Entry: 8
       Data: 
@@ -1828,10 +1828,10 @@ MonoBehaviour:
       Data: 38|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 4
+      Data: 1
     - Name: num
       Entry: 3
-      Data: 36
+      Data: 11
     - Name: 
       Entry: 8
       Data: 
@@ -1864,10 +1864,10 @@ MonoBehaviour:
       Data: 41|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 4
+      Data: 0
     - Name: num
       Entry: 3
-      Data: 39
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -1900,10 +1900,10 @@ MonoBehaviour:
       Data: 44|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 4
+      Data: 0
     - Name: num
       Entry: 3
-      Data: 42
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -1996,10 +1996,10 @@ MonoBehaviour:
       Data: 52|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 5
+      Data: 4
     - Name: num
       Entry: 3
-      Data: 50
+      Data: 39
     - Name: 
       Entry: 8
       Data: 
@@ -2032,10 +2032,10 @@ MonoBehaviour:
       Data: 55|Rubik.RubikInfo, Assembly-CSharp
     - Name: color
       Entry: 3
-      Data: 5
+      Data: 4
     - Name: num
       Entry: 3
-      Data: 53
+      Data: 36
     - Name: 
       Entry: 8
       Data: 
@@ -2048,8 +2048,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  command: FR
-  decision: 
+  command: R
+  decision: RR'FFF
   images:
   - {fileID: 565337704}
   - {fileID: 1982251989}
@@ -2271,7 +2271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.86666673, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2345,7 +2345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.4666667, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2641,7 +2641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.86666673, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2895,7 +2895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.4666667, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2942,7 +2942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.86666673, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3117,7 +3117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.4666667, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3561,7 +3561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3923,7 +3923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.4666667, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4189,7 +4189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.4666667, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
