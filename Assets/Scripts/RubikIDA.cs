@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security;
-using NUnit.Framework;
+﻿using System.Collections.Generic;
 using Rubik;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class RubikIDA : MonoBehaviour
+public class RubikIda : MonoBehaviour
 {
     private float Found { get; } = float.NaN;
 
@@ -17,20 +12,18 @@ public class RubikIDA : MonoBehaviour
         return float.IsNaN(t);
     }
 
-    [SerializeField] private RubikMonobehaviour rubik;
+    [SerializeField] private Rubik.Rubik rubik;
 
     [Button]
     public void RunTest()
     {
         var node = new Node(rubik.rubikCube);
         var idaResults = IdaStar(node);
-        if (idaResults != null)
+        if (idaResults == null) return;
+        Debug.Log(idaResults.Value.bound);
+        foreach (var node1 in idaResults.Value.path)
         {
-            Debug.Log(idaResults.Value.bound);
-            foreach (var node1 in idaResults.Value.path)
-            {
-                Debug.Log(node1);
-            }
+            Debug.Log(node1);
         }
     }
 
