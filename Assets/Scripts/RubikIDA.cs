@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Rubik;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UnityEngine;
@@ -12,19 +13,19 @@ public class RubikIda : MonoBehaviour
         return float.IsNaN(t);
     }
     
-    [SerializeField] private Rubik.Rubik rubik;
+    [SerializeField] private Rubik.Rubik rubikMonoBehaviour;
 
     [Button]
     public void RunTest()
     {
-        var node = new Node(rubik.rubikCube);
+        var rubik = new RubikCube();
+        rubik.UseCommand(rubikMonoBehaviour.Command);
+        var node = new Node(rubik);
         var idaResults = IdaStar(node);
         if (idaResults == null) return;
+        rubikMonoBehaviour.Decision = idaResults.Value.path.ToArray()[0].Command();
         Debug.Log(idaResults.Value.bound);
-        foreach (var node1 in idaResults.Value.path)
-        {
-            Debug.Log(node1.Command());
-        }
+        Debug.Log(rubikMonoBehaviour.Decision);
     }
 
     private (Stack<Node> path, float bound)? IdaStar(Node root)
