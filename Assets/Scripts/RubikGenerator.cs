@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class RubicGenerator : MonoBehaviour
+public class RubikGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;
     [SerializeField] private int size = 3;
