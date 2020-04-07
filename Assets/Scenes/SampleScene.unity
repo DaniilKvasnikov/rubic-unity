@@ -1353,6 +1353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 647683314}
   - component: {fileID: 647683313}
+  - component: {fileID: 647683315}
   m_Layer: 0
   m_Name: Rubik
   m_TagString: Untagged
@@ -1380,7 +1381,673 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: rubikCube
+      Entry: 7
+      Data: 0|Rubik.RubikCube, Assembly-CSharp
+    - Name: Cube
+      Entry: 7
+      Data: 1|Rubik.RubikInfo[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 54
+    - Name: 
+      Entry: 7
+      Data: 2|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 0
+    - Name: num
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 0
+    - Name: num
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 0
+    - Name: num
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 0
+    - Name: num
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 6|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 0
+    - Name: num
+      Entry: 3
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 0
+    - Name: num
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 0
+    - Name: num
+      Entry: 3
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 0
+    - Name: num
+      Entry: 3
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 0
+    - Name: num
+      Entry: 3
+      Data: 8
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 11|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 1
+    - Name: num
+      Entry: 3
+      Data: 9
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 12|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 1
+    - Name: num
+      Entry: 3
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 13|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 1
+    - Name: num
+      Entry: 3
+      Data: 11
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 14|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 1
+    - Name: num
+      Entry: 3
+      Data: 12
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 15|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 1
+    - Name: num
+      Entry: 3
+      Data: 13
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 16|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 1
+    - Name: num
+      Entry: 3
+      Data: 14
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 17|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 1
+    - Name: num
+      Entry: 3
+      Data: 15
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 18|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 1
+    - Name: num
+      Entry: 3
+      Data: 16
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 19|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 1
+    - Name: num
+      Entry: 3
+      Data: 17
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 20|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 2
+    - Name: num
+      Entry: 3
+      Data: 18
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 21|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 2
+    - Name: num
+      Entry: 3
+      Data: 19
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 22|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 2
+    - Name: num
+      Entry: 3
+      Data: 20
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 23|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 2
+    - Name: num
+      Entry: 3
+      Data: 21
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 24|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 2
+    - Name: num
+      Entry: 3
+      Data: 22
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 25|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 2
+    - Name: num
+      Entry: 3
+      Data: 23
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 26|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 2
+    - Name: num
+      Entry: 3
+      Data: 24
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 27|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 2
+    - Name: num
+      Entry: 3
+      Data: 25
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 28|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 2
+    - Name: num
+      Entry: 3
+      Data: 26
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 29|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 3
+    - Name: num
+      Entry: 3
+      Data: 27
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 30|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 3
+    - Name: num
+      Entry: 3
+      Data: 28
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 31|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 3
+    - Name: num
+      Entry: 3
+      Data: 29
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 32|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 3
+    - Name: num
+      Entry: 3
+      Data: 30
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 33|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 3
+    - Name: num
+      Entry: 3
+      Data: 31
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 34|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 3
+    - Name: num
+      Entry: 3
+      Data: 32
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 35|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 3
+    - Name: num
+      Entry: 3
+      Data: 33
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 36|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 3
+    - Name: num
+      Entry: 3
+      Data: 34
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 37|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 3
+    - Name: num
+      Entry: 3
+      Data: 35
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 38|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 4
+    - Name: num
+      Entry: 3
+      Data: 36
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 39|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 4
+    - Name: num
+      Entry: 3
+      Data: 37
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 40|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 4
+    - Name: num
+      Entry: 3
+      Data: 38
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 41|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 4
+    - Name: num
+      Entry: 3
+      Data: 39
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 42|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 4
+    - Name: num
+      Entry: 3
+      Data: 40
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 43|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 4
+    - Name: num
+      Entry: 3
+      Data: 41
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 44|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 4
+    - Name: num
+      Entry: 3
+      Data: 42
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 45|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 4
+    - Name: num
+      Entry: 3
+      Data: 43
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 46|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 4
+    - Name: num
+      Entry: 3
+      Data: 44
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 47|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 5
+    - Name: num
+      Entry: 3
+      Data: 45
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 48|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 5
+    - Name: num
+      Entry: 3
+      Data: 46
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 49|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 5
+    - Name: num
+      Entry: 3
+      Data: 47
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 50|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 5
+    - Name: num
+      Entry: 3
+      Data: 48
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 51|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 5
+    - Name: num
+      Entry: 3
+      Data: 49
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 52|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 5
+    - Name: num
+      Entry: 3
+      Data: 50
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 53|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 5
+    - Name: num
+      Entry: 3
+      Data: 51
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 54|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 5
+    - Name: num
+      Entry: 3
+      Data: 52
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 55|Rubik.RubikInfo, Assembly-CSharp
+    - Name: color
+      Entry: 3
+      Data: 5
+    - Name: num
+      Entry: 3
+      Data: 53
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   command: FR
   decision: 
   images:
@@ -1459,6 +2126,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &647683315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647683312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8bade5258b973140b9de79083ef0822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rubik: {fileID: 647683313}
 --- !u!1 &674078798
 GameObject:
   m_ObjectHideFlags: 0

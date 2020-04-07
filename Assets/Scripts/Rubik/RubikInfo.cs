@@ -10,5 +10,11 @@
             this.color = color;
             this.num = num;
         }
+
+        public RubikInfo(RubikInfo rubikInfo)
+        {
+            color = rubikInfo.color;
+            num = rubikInfo.num;
+        }
     }
 }

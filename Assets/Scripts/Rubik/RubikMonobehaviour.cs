@@ -20,7 +20,7 @@ public class RubikMonobehaviour : SerializedMonoBehaviour
     [SerializeField] private Color down = Color.white;
 
 
-    private RubikCube rubikCube = new RubikCube();
+    [HideInInspector] public RubikCube rubikCube = new RubikCube();
     
     [Button]
     public void ResetCube()
