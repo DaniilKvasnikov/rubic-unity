@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Rubik;
 
 public class Node
@@ -20,13 +21,13 @@ public class Node
                 bool reverse = i == 1;
                 string commandString = command + (reverse ? "\'" : "");
                 RubikCube rubikCube = new RubikCube(rubik);
-                rubikCube.UseCommands(commandString);
+                rubikCube.UseDecision(commandString);
                 var node = new Node(rubikCube);
                 list.Add(node);
             }
         }
-
-        return list;
+        
+        return list.OrderBy(e => e.Heuristic());
     }
 
     public bool IsGoal()
@@ -46,6 +47,6 @@ public class Node
 
     public string Command()
     {
-        return rubik.Command();
+        return rubik.Decision;
     }
 }

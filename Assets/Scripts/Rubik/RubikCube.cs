@@ -7,28 +7,44 @@ namespace Rubik
     public class RubikCube
     {
         public RubikInfo[] Cube;
-        private int countElementsRubik = 6 * 9;
-        public static string Commands = "FURBLD";
+        private const int CountElementsRubik = 6 * 9;
+        public const string Commands = "FURBLD";
 
         private string command = "";
+        private string decision = "";
+
+        public string Command => command;
+        public string Decision => decision;
 
         public RubikCube()
         {
-            Cube = new RubikInfo[countElementsRubik];
+            Cube = new RubikInfo[CountElementsRubik];
             CubeInitialization();
         }
 
         public RubikCube(RubikCube copy)
         {
-            Cube = new RubikInfo[countElementsRubik];
+            Cube = new RubikInfo[CountElementsRubik];
             CubeInitialization(copy.Cube);
-            command = copy.Command();
+            command = copy.Command;
+            decision = copy.Decision;
         }
 
-        public void UseCommands(string commands)
+        public void UseCommand(string commands)
+        {
+            command += commands;
+            UseCommands(commands);
+        }
+
+        public void UseDecision(string commands)
+        {
+            decision += commands;
+            UseCommands(commands);
+        }
+
+        private void UseCommands(string commands)
         {
             CheckCommands(commands);
-            command += commands;
             for (var i = 0; i < commands.Length; i++)
             {
                 var useCommand = commands[i];
@@ -227,7 +243,7 @@ namespace Rubik
 
         private void CubeInitialization()
         {
-            for (int i = 0; i < countElementsRubik; i++)
+            for (int i = 0; i < CountElementsRubik; i++)
             {
                 Cube[i] = new RubikInfo(GetColorByInt(i / 9), i);
             }
@@ -235,7 +251,7 @@ namespace Rubik
 
         private void CubeInitialization(RubikInfo[] copy)
         {
-            for (int i = 0; i < countElementsRubik; i++)
+            for (int i = 0; i < CountElementsRubik; i++)
             {
                 Cube[i] = new RubikInfo(copy[i]);
             }
@@ -330,10 +346,5 @@ namespace Rubik
         }
 
         #endregion
-
-        public string Command()
-        {
-            return command;
-        }
     }
 }
