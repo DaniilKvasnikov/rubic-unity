@@ -33,7 +33,7 @@ namespace Rubik
         private void MixUpCube()
         {
             ResetCube();
-            rubikCube.UseCommand(CorrectCommand(command));
+            rubikCube.UseCommand(command);
             DrawCube();
         }
 
@@ -41,7 +41,7 @@ namespace Rubik
         private void UseDecision()
         {
             MixUpCube();
-            rubikCube.UseDecision(CorrectCommand(decision));
+            rubikCube.UseDecision(decision);
             DrawCube();
         }
 
@@ -86,18 +86,6 @@ namespace Rubik
 
                 images[i].color = color;
             }
-        }
-
-        private string CorrectCommand(string command)
-        {
-            command = command.Replace(" ", "");
-            if (command.Length == 0) return command;
-            string newCommand = command[0].ToString();
-            for (int i = 1; i < command.Length; i++)
-            {
-                newCommand += command[i] != '2' ? command[i] : command[i - 1];
-            }
-            return newCommand;
         }
     }
 }
