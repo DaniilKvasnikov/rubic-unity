@@ -19,6 +19,7 @@ public class RubikGenerator : MonoBehaviour
     {
         cubes = new List<GameObject>();
         cubeElements= new List<CubeElement>();
+        var positionParent = transform.position;
         var transformParent = transform;
         for (int x = 0; x < size; x++)
         {
@@ -26,7 +27,7 @@ public class RubikGenerator : MonoBehaviour
             {
                 for (int z = 0; z < size; z++)
                 {
-                    var position = new Vector3(x, y, z);
+                    var position = positionParent + new Vector3(x, y, z);
                     var cube = Instantiate(prefab, position, Quaternion.identity, transformParent);
                     cubes.Add(cube);
                     

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DefaultNamespace;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
@@ -9,11 +8,7 @@ public class CubeRotator : SerializedMonoBehaviour
 {
     [SerializeField] private KeyCode reverseButton = KeyCode.LeftShift;
     [OdinSerialize] public Dictionary<KeyCode, RotateInfo> rotateButton = new Dictionary<KeyCode, RotateInfo>();
-    [SerializeField] private RubicGenerator generator;
-    [SerializeField] private float TOLERANCE = .1f;
-    
-    private int angle = 90;
-    private bool reverse;
+    [SerializeField] private RubikGenerator generator;
     
     void Update()
     {
