@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 
-public class RubikIda : MonoBehaviour
+public class RubikIDA : MonoBehaviour
 {
     private float Found { get; } = float.NaN;
     
