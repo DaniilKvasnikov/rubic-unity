@@ -32,14 +32,28 @@ namespace Rubik
 
         public void UseCommand(string commands)
         {
+            commands = CorrectCommand(commands);
             command += commands;
             UseCommands(commands);
         }
 
         public void UseDecision(string commands)
         {
+            commands = CorrectCommand(commands);
             decision += commands;
             UseCommands(commands);
+        }
+        
+        private string CorrectCommand(string command)
+        {
+            command = command.Replace(" ", "");
+            if (command.Length == 0) return command;
+            string newCommand = command[0].ToString();
+            for (int i = 1; i < command.Length; i++)
+            {
+                newCommand += command[i] != '2' ? command[i] : command[i - 1];
+            }
+            return newCommand;
         }
 
         private void UseCommands(string commands)
