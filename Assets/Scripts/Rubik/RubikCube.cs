@@ -335,16 +335,16 @@ namespace Rubik
 
         #region Heuristic
 
-        public float Heuristic()
+        public float Heuristic(HeuristicType heuristicType)
         {
-            return HeuristicNotOnPlace();
+            return RubikHeuristics.GetHeuristic(heuristicType).Heuristic(this);
         }
 
-        private float HeuristicNotOnPlace()
+        public float Cost(Node successor, HeuristicType heuristicType)
         {
-            return Cube.Select((t, i) => (t.num != i ? 1 : 0)).Sum();
+            return RubikHeuristics.GetHeuristic(heuristicType).Cost(this, successor.Rubik);
         }
-
+        
         #endregion
     }
 }
