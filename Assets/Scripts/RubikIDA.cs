@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Rubik;
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 
 public class RubikIda : MonoBehaviour
