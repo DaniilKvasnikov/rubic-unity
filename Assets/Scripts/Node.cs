@@ -16,19 +16,11 @@ public class Node
     public IEnumerable<Node> Successors(HeuristicType heuristicType)
     {
         var list = new List<Node>();
-        foreach (var command in RubikCube.Commands)
+        foreach (RubikCube rubikCube in Rubik.Successors(heuristicType))
         {
-            for (int i = 0; i < 2; i++)
-            {
-                bool reverse = i == 1;
-                string commandString = command + (reverse ? "\'" : "");
-                RubikCube rubikCube = new RubikCube(Rubik);
-                rubikCube.UseDecision(commandString);
-                var node = new Node(rubikCube);
-                list.Add(node);
-            }
+            var node = new Node(rubikCube);
+            list.Add(node);
         }
-        
         return list.OrderBy(e => e.Heuristic(heuristicType));
     }
 

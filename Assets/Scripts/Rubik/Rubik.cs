@@ -17,7 +17,7 @@ namespace Rubik
         [SerializeField] private Color back = Color.white;
         [SerializeField] private Color down = Color.white;
         
-        [HideInInspector] public RubikCube rubikCube = new RubikCube();
+        public RubikCube RubikCube { get; } = new RubikCube();
         
         public string Command => command;
         public string Decision { get=> decision; set => decision = value; }
@@ -25,7 +25,7 @@ namespace Rubik
         [Button]
         public void ResetCube()
         {
-            rubikCube.Reset();
+            RubikCube.Reset();
             DrawCube();
         }
 
@@ -33,7 +33,7 @@ namespace Rubik
         private void MixUpCube()
         {
             ResetCube();
-            rubikCube.UseCommand(command);
+            RubikCube.UseCommand(command);
             DrawCube();
         }
 
@@ -41,7 +41,7 @@ namespace Rubik
         private void UseDecision()
         {
             MixUpCube();
-            rubikCube.UseDecision(decision);
+            RubikCube.UseDecision(decision);
             DrawCube();
         }
 
@@ -49,20 +49,12 @@ namespace Rubik
         [Button]
         public void RandomCommand(int len)
         {
-            var newCommand = "";
-            for (int i = 0; i < len; i++)
-            {
-                char randomCommand = RubikCube.Commands[Random.Range(0, RubikCube.Commands.Length - 1)];
-                bool reverse = Random.Range(0, 1) == 1;
-                newCommand += randomCommand + (reverse ? "\'" : "");
-            }
-
-            command = newCommand;
+            command = RubikCube.GetRandomCommands(len);
         }
 
         private void DrawCube()
         {
-            string rubik = rubikCube.ToString();
+            string rubik = RubikCube.ToString();
             Debug.Log(rubik);
             for (int i = 0; i < 6; i++)
             {

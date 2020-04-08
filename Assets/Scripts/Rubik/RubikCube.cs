@@ -1,49 +1,108 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 namespace Rubik
 {
     public class RubikCube
     {
         public RubikInfo[] Cube;
+        public List<RubikCommand> obfuscationCommands;
+        public List<RubikCommand> solutionCommands;
+        
         private const int CountElementsRubik = 6 * 9;
-        public const string Commands = "FURBLD";
-
-        private string command = "";
-        private string decision = "";
-
-        public string Command => command;
-        public string Decision => decision;
+        private Dictionary<string, RubikCommand> allCommands;
+      
+        #region Initializations
 
         public RubikCube()
         {
-            Cube = new RubikInfo[CountElementsRubik];
+            Init();
+            obfuscationCommands = new List<RubikCommand>();
+            solutionCommands = new List<RubikCommand>();
             CubeInitialization();
         }
 
         public RubikCube(RubikCube copy)
         {
-            Cube = new RubikInfo[CountElementsRubik];
+            Init();
+            obfuscationCommands = new List<RubikCommand>(copy.obfuscationCommands);
+            solutionCommands = new List<RubikCommand>(copy.solutionCommands);
             CubeInitialization(copy.Cube);
-            command = copy.Command;
-            decision = copy.Decision;
         }
 
+        public string Decision => solutionCommands.Aggregate("", (current, command) => current + command);
+
+        private void Init()
+        {
+            allCommands = new Dictionary<string, RubikCommand>()
+            {
+                {"F", new RubikCommand(CommandType.FRONT, false, Front,"F")},
+                {"F\'", new RubikCommand(CommandType.FRONT, true, Front,"F\'")},
+                {"B", new RubikCommand(CommandType.BACK, false, Back, "B")},
+                {"B\'", new RubikCommand(CommandType.BACK, true, Back, "B\'")},
+                {"L", new RubikCommand(CommandType.LEFT, false, Left, "L")},
+                {"L\'", new RubikCommand(CommandType.LEFT, true, Left, "L\'")},
+                {"R", new RubikCommand(CommandType.RIGHT, false, Right, "R")},
+                {"R\'", new RubikCommand(CommandType.RIGHT, true, Right, "R\'")},
+                {"U", new RubikCommand(CommandType.UP, false, Up, "U")},
+                {"U\'", new RubikCommand(CommandType.UP, true, Up, "U\'")},
+                {"D", new RubikCommand(CommandType.DOWN, false, Down, "D")},
+                {"D\'", new RubikCommand(CommandType.DOWN, true, Down, "D\'")},
+            };
+            Cube = new RubikInfo[CountElementsRubik];
+        }
+
+        private void CubeInitialization()
+        {
+            for (int i = 0; i < CountElementsRubik; i++)
+            {
+                Cube[i] = new RubikInfo(GetColorByInt(i / 9), i);
+            }
+        }
+
+        private void CubeInitialization(RubikInfo[] copy)
+        {
+            for (int i = 0; i < CountElementsRubik; i++)
+            {
+                Cube[i] = new RubikInfo(copy[i]);
+            }
+        }
+
+        #endregion
+        
         public void UseCommand(string commands)
         {
-            commands = CorrectCommand(commands);
-            command += commands;
-            UseCommands(commands);
+            List<RubikCommand> commandList = StringToCommands(CorrectCommand(commands));
+            UseCommands(commandList);
+            obfuscationCommands.AddRange(commandList);
         }
 
         public void UseDecision(string commands)
         {
-            commands = CorrectCommand(commands);
-            decision += commands;
-            UseCommands(commands);
+            List<RubikCommand> commandList = StringToCommands(CorrectCommand(commands));
+            UseCommands(commandList);
+            solutionCommands.AddRange(commandList);
         }
-        
+
+        private List<RubikCommand> StringToCommands(string correctCommand)
+        {
+            List<RubikCommand> commands = new List<RubikCommand>();
+            correctCommand = CorrectCommand(correctCommand);
+            for (int i = 0; i < correctCommand.Length; i++)
+            {
+                bool reverse = i + 1 < correctCommand.Length && correctCommand[i + 1] == '\'';
+                string command = correctCommand[i] + (reverse ? "\'" : "");
+                if (!allCommands.ContainsKey(command))
+                    throw new Exception("Unknown command " + command);
+                commands.Add(allCommands[command]);
+                if (reverse) i++;
+            }
+
+            return commands;
+        }
+
         private string CorrectCommand(string command)
         {
             command = command.Replace(" ", "");
@@ -56,17 +115,10 @@ namespace Rubik
             return newCommand;
         }
 
-        private void UseCommands(string commands)
+        private void UseCommands(List<RubikCommand> commands)
         {
-            CheckCommands(commands);
-            for (var i = 0; i < commands.Length; i++)
-            {
-                var useCommand = commands[i];
-                var reverse = i + 1 < commands.Length && commands[i + 1] == '\'';
-                UseCommand(useCommand, reverse);
-                if (reverse)
-                    i++;
-            }
+            foreach (var command in commands)
+                command.Function();
         }
 
         public void Reset()
@@ -87,7 +139,7 @@ namespace Rubik
 
         #region Rotate
 
-        private void Front(bool reverse)
+        private void Front(RubikCommand rubikCommand)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
 
@@ -105,10 +157,10 @@ namespace Rubik
             
             listRotate.AddRange(GetFaceRotateList(2));
 
-            RotateFace(listRotate, reverse);
+            RotateFace(listRotate, rubikCommand.reverse);
         }
 
-        private void Up(bool reverse)
+        private void Up(RubikCommand rubikCommand)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
 
@@ -126,10 +178,10 @@ namespace Rubik
 
             listRotate.AddRange(GetFaceRotateList(0));
 
-            RotateFace(listRotate, reverse);
+            RotateFace(listRotate, rubikCommand.reverse);
         }
 
-        private void Right(bool reverse)
+        private void Right(RubikCommand rubikCommand)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
 
@@ -147,10 +199,10 @@ namespace Rubik
 
             listRotate.AddRange(GetFaceRotateList(3));
 
-            RotateFace(listRotate, reverse);
+            RotateFace(listRotate, rubikCommand.reverse);
         }
 
-        private void Back(bool reverse)
+        private void Back(RubikCommand rubikCommand)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
 
@@ -168,10 +220,10 @@ namespace Rubik
 
             listRotate.AddRange(GetFaceRotateList(4));
 
-            RotateFace(listRotate, reverse);
+            RotateFace(listRotate, rubikCommand.reverse);
         }
 
-        private void Left(bool reverse)
+        private void Left(RubikCommand rubikCommand)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
 
@@ -189,10 +241,10 @@ namespace Rubik
 
             listRotate.AddRange(GetFaceRotateList(1));
 
-            RotateFace(listRotate, reverse);
+            RotateFace(listRotate, rubikCommand.reverse);
         }
 
-        private void Down(bool reverse)
+        private void Down(RubikCommand rubikCommand)
         {
             List<(int fromLayer, int fromNum, int toLayer, int toNum)> listRotate = new List<(int fromLayer, int fromNum, int toLayer, int toNum)>();
 
@@ -210,7 +262,7 @@ namespace Rubik
 
             listRotate.AddRange(GetFaceRotateList(5));
 
-            RotateFace(listRotate, reverse);
+            RotateFace(listRotate, rubikCommand.reverse);
         }
         
         private List<(int fromLayer, int fromNum, int toLayer, int toNum)> GetFaceRotateList(int faceNum)
@@ -255,22 +307,6 @@ namespace Rubik
 
         #region Private functions
 
-        private void CubeInitialization()
-        {
-            for (int i = 0; i < CountElementsRubik; i++)
-            {
-                Cube[i] = new RubikInfo(GetColorByInt(i / 9), i);
-            }
-        }
-
-        private void CubeInitialization(RubikInfo[] copy)
-        {
-            for (int i = 0; i < CountElementsRubik; i++)
-            {
-                Cube[i] = new RubikInfo(copy[i]);
-            }
-        }
-
         private RubikColor GetColorByInt(int i)
         {
             switch (i)
@@ -291,49 +327,6 @@ namespace Rubik
             throw new Exception("Unknown color");
         }
 
-        private void CheckCommands(string commands)
-        {
-            for (int i = 0; i < commands.Length; i++)
-            {
-                if (commands[i] != '\'' && !IsCommands(commands[i]))
-                    throw new Exception("Unknown command " + commands[i] + " use " + Commands);
-                if (commands[i] == '\'' && i == 0)
-                    throw new Exception("\' cant be first ");
-                if (commands[i] == '\'' && !IsCommands(commands[i - 1]))
-                    throw new Exception("\' must be under " + Commands);
-            }
-        }
-
-        private bool IsCommands(char command)
-        {
-            return Commands.Contains(command.ToString());
-        }
-
-        private void UseCommand(char command, bool reverse)
-        {
-            switch (command)
-            {
-                case 'F':
-                    Front(reverse);
-                    break;
-                case 'U':
-                    Up(reverse);
-                    break;
-                case 'R':
-                    Right(reverse);
-                    break;
-                case 'L':
-                    Left(reverse);
-                    break;
-                case 'B':
-                    Back(reverse);
-                    break;
-                case 'D':
-                    Down(reverse);
-                    break;
-            }
-        }
-        
         #endregion
 
         public override string ToString()
@@ -360,5 +353,29 @@ namespace Rubik
         }
         
         #endregion
+
+        public IEnumerable<RubikCube> Successors(HeuristicType heuristicType)
+        {
+            List<RubikCube> successors = new List<RubikCube>();
+
+            foreach (var command in allCommands)
+            {
+                var cube = new RubikCube(this);
+                cube.UseDecision(command.Value.ToString());
+                successors.Add(cube);
+            }
+            return successors;
+        }
+
+        public string GetRandomCommands(int len)
+        {
+            string commands = "";
+            for (int i = 0; i < len; i++)
+            {
+                commands += allCommands.Keys.ToArray()[Random.Range(0, allCommands.Keys.Count)];
+            }
+
+            return commands;
+        }
     }
 }
