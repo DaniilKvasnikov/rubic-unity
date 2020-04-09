@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rubikMonoBehaviour: {fileID: 835704629}
-  heuristicType: 0
+  settings: {fileID: 11400000, guid: c12b4190f60e77f4bb88b5a55bda7d94, type: 2}
 --- !u!4 &835704628
 Transform:
   m_ObjectHideFlags: 0
@@ -582,8 +582,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  command: F'LB'
-  decision: BL'F
+  command: F'UDB'F'L'
+  decision: LBFU'D'F
   images:
   - {fileID: 303796435}
   - {fileID: 1004139279926123617}

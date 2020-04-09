@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53afd6bc11514f238fae97787bb85225, type: 3}
   m_Name: ManhattanSettings
   m_EditorClassIdentifier: 
-  Cost: 0.1
+  Cost: 0.4

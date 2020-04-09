@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019655043c0a48edb87d8ac960274289, type: 3}
   m_Name: HeuristicSettings
   m_EditorClassIdentifier: 
-  manhattanSettings: {fileID: 0}
-  onPlaceSettings: {fileID: 0}
+  heuristicType: 0
+  onPlaceSettings: {fileID: 11400000, guid: 70de04150d309b14db9dc16419a4b3f6, type: 2}
+  manhattanSettings: {fileID: 11400000, guid: 3ea024bb9adce1747b95fe7db5654d29, type: 2}
