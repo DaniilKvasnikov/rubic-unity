@@ -13,7 +13,7 @@ public class Node
 
     public RubikCube Rubik => rubik;
 
-    public IEnumerable<Node> Successors(HeuristicType heuristicType)
+    public List<Node> Successors(HeuristicType heuristicType)
     {
         var list = new List<Node>();
         foreach (RubikCube rubikCube in Rubik.Successors(heuristicType))
@@ -21,7 +21,7 @@ public class Node
             var node = new Node(rubikCube);
             list.Add(node);
         }
-        return list.OrderBy(e => e.Heuristic(heuristicType));
+        return list.OrderBy(e => e.Heuristic(heuristicType)).ToList();
     }
 
     public bool IsGoal()

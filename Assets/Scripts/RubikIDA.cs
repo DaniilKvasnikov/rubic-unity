@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Rubik;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
@@ -22,9 +24,18 @@ public class RubikIDA : MonoBehaviour
         var rubik = new RubikCube();
         rubik.UseCommand(rubikMonoBehaviour.Command);
         var node = new Node(rubik);
+        
+        Debug.Log("Start ida");
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        
         var idaResults = IdaStar(node);
+        
+        watch.Stop();
+        var elapsedMs = watch.ElapsedMilliseconds;
+        
         if (idaResults == null) return;
         rubikMonoBehaviour.Decision = idaResults.Value.path.ToArray()[0].Command();
+        Debug.Log("Time " + TimeSpan.FromMilliseconds(elapsedMs).TotalSeconds);
         Debug.Log(idaResults.Value.bound);
         Debug.Log(rubikMonoBehaviour.Decision);
     }
@@ -49,10 +60,10 @@ public class RubikIDA : MonoBehaviour
         var f = g + node.Heuristic(heuristicType);
         if (f > bound) return f;
         if (node.IsGoal()) return Found;
+        var successors = node.Successors(heuristicType);
         var min = float.PositiveInfinity;
-        foreach (var successor in node.Successors(heuristicType))
+        foreach (var successor in successors.Where(successor => !path.Contains(successor)))
         {
-            if (path.Contains(successor)) continue;
             path.Push(successor);
             var t = Search(path, g + node.Cost(successor, heuristicType), bound);
             if (IsFound(t)) return Found;

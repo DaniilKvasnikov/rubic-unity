@@ -360,11 +360,24 @@ namespace Rubik
 
             foreach (var command in allCommands)
             {
+                if (!IsNewSuccessor(command.Value)) continue;
                 var cube = new RubikCube(this);
                 cube.UseDecision(command.Value.ToString());
                 successors.Add(cube);
             }
             return successors;
+        }
+
+        private bool IsNewSuccessor(RubikCommand command)
+        {
+            if (solutionCommands.Count > 0 && IsReverseCommand(command, solutionCommands[solutionCommands.Count - 1]))
+                return false;
+            return true;
+        }
+
+        private bool IsReverseCommand(RubikCommand command1, RubikCommand command2)
+        {
+            return command1.type == command2.type && command1.reverse != command2.reverse;
         }
 
         public string GetRandomCommands(int len)
