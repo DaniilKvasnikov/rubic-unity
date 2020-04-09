@@ -342,9 +342,9 @@ namespace Rubik
 
         #region Heuristic
 
-        public float Heuristic(HeuristicType heuristicType)
+        public float Heuristic(HeuristicSettings settings)
         {
-            return RubikHeuristics.GetHeuristic(heuristicType).Heuristic(this);
+            return RubikHeuristics.GetHeuristic(settings.heuristicType).Heuristic(this, settings);
         }
 
         public float Cost(Node successor, HeuristicType heuristicType)

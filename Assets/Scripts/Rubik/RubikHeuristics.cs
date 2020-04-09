@@ -4,7 +4,8 @@ namespace Rubik
 {
     public enum HeuristicType
     {
-        OnPlace
+        OnPlace,
+        Manhattan 
     }
     
     public static class RubikHeuristics
@@ -17,6 +18,7 @@ namespace Rubik
         private static readonly Dictionary<HeuristicType, IRubikHeuristic> Heuristics = new Dictionary<HeuristicType, IRubikHeuristic>()
         {
             { HeuristicType.OnPlace, new RubikHeuristicOnPlace() },
+            { HeuristicType.Manhattan, new RubikHeuristicManhattan() },
         };
     }
 }

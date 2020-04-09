@@ -16,7 +16,7 @@ public class RubikIDA : MonoBehaviour
     }
     
     [SerializeField] private Rubik.Rubik rubikMonoBehaviour;
-    [SerializeField] private HeuristicType heuristicType;
+    [SerializeField] private HeuristicSettings settings;
 
     [Button]
     public void RunTest()
@@ -42,7 +42,7 @@ public class RubikIDA : MonoBehaviour
 
     private (Stack<Node> path, float bound)? IdaStar(Node root)
     {
-        var bound = root.Heuristic(heuristicType);
+        var bound = root.Heuristic(settings);
         var path = new Stack<Node>();
         path.Push(root);
         while (true)
@@ -57,15 +57,15 @@ public class RubikIDA : MonoBehaviour
     private float Search(Stack<Node> path, float g, float bound)
     {
         var node = path.Peek();
-        var f = g + node.Heuristic(heuristicType);
+        var f = g + node.Heuristic(settings);
         if (f > bound) return f;
         if (node.IsGoal()) return Found;
-        var successors = node.Successors(heuristicType);
+        var successors = node.Successors(settings);
         var min = float.PositiveInfinity;
         foreach (var successor in successors.Where(successor => !path.Contains(successor)))
         {
             path.Push(successor);
-            var t = Search(path, g + node.Cost(successor, heuristicType), bound);
+            var t = Search(path, g + node.Cost(successor, settings.heuristicType), bound);
             if (IsFound(t)) return Found;
             if (t < min) min = t;
             path.Pop();

@@ -13,15 +13,15 @@ public class Node
 
     public RubikCube Rubik => rubik;
 
-    public List<Node> Successors(HeuristicType heuristicType)
+    public List<Node> Successors(HeuristicSettings settings)
     {
         var list = new List<Node>();
-        foreach (RubikCube rubikCube in Rubik.Successors(heuristicType))
+        foreach (RubikCube rubikCube in Rubik.Successors(settings.heuristicType))
         {
             var node = new Node(rubikCube);
             list.Add(node);
         }
-        return list.OrderBy(e => e.Heuristic(heuristicType)).ToList();
+        return list.OrderBy(e => e.Heuristic(settings)).ToList();
     }
 
     public bool IsGoal()
@@ -29,9 +29,9 @@ public class Node
         return Rubik.IsCorrect();
     }
 
-    public float Heuristic(HeuristicType heuristicType)
+    public float Heuristic(HeuristicSettings settings)
     {
-        return Rubik.Heuristic(heuristicType);
+        return Rubik.Heuristic(settings);
     }
 
     public override string ToString()

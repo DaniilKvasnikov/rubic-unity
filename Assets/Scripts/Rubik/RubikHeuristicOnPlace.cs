@@ -4,8 +4,11 @@ namespace Rubik
 {
     public class RubikHeuristicOnPlace : IRubikHeuristic
     {
-        public float Heuristic(RubikCube cube)
+        private OnPlaceSettings settings;
+        
+        public float Heuristic(RubikCube cube, HeuristicSettings settings)
         {
+            this.settings = settings.onPlaceSettings;
             return HeuristicNotOnPlace(cube);
         }
 
@@ -16,7 +19,7 @@ namespace Rubik
         
         public float Cost(RubikCube node, RubikCube successor)
         {
-            return 20f;
+            return settings.Cost;
         }
     }
 }
