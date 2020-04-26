@@ -5,6 +5,7 @@ using Rubik;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class RubikIDA : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class RubikIDA : MonoBehaviour
     
     [SerializeField] private Rubik.Rubik rubikMonoBehaviour;
     [SerializeField] private HeuristicSettings settings;
+    [SerializeField] private float TimeOut = 10f;
+
+    private float time;
 
     [Button]
     public void RunTest()
@@ -28,8 +32,12 @@ public class RubikIDA : MonoBehaviour
         Debug.Log("Start ida");
         var watch = System.Diagnostics.Stopwatch.StartNew();
         
-        var idaResults = IdaStar(node);
-        
+        var task = Task.Run(() => IdaStar(node));
+        if (!task.Wait(TimeSpan.FromSeconds(TimeOut)))
+            throw new Exception("Timed out");
+
+        var idaResults = task.Result;
+
         watch.Stop();
         var elapsedMs = watch.ElapsedMilliseconds;
         
