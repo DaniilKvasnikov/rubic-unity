@@ -8,5 +8,6 @@ namespace Rubik
         public HeuristicType heuristicType;
         public OnPlaceSettings onPlaceSettings;
         public ManhattanSettings manhattanSettings;
+        public StepByStepSettings stepByStepSettings;
     }
 }

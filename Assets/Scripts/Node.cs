@@ -6,9 +6,12 @@ public class Node
 {
     private readonly RubikCube rubik;
 
-    public Node(RubikCube rubik)
+    public float h;
+
+    public Node(RubikCube rubik, HeuristicSettings settings)
     {
         this.rubik = rubik;
+        h =  Rubik.Heuristic(settings);
     }
 
     public RubikCube Rubik => rubik;
@@ -18,22 +21,17 @@ public class Node
         var list = new List<Node>();
         foreach (RubikCube rubikCube in Rubik.Successors(settings.heuristicType))
         {
-            var node = new Node(rubikCube);
+            var node = new Node(rubikCube, settings);
             list.Add(node);
         }
-        return list.OrderBy(e => e.Heuristic(settings)).ToList();
+        return list.OrderBy(e => e.h).ToList();
     }
 
     public bool IsGoal()
     {
         return Rubik.IsCorrect();
     }
-
-    public float Heuristic(HeuristicSettings settings)
-    {
-        return Rubik.Heuristic(settings);
-    }
-
+    
     public override string ToString()
     {
         return Rubik.ToString();

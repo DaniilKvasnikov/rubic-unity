@@ -23,7 +23,7 @@ public class RubikIDA : MonoBehaviour
     {
         var rubik = new RubikCube();
         rubik.UseCommand(rubikMonoBehaviour.Command);
-        var node = new Node(rubik);
+        var node = new Node(rubik, settings);
         
         Debug.Log("Start ida");
         var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -42,7 +42,7 @@ public class RubikIDA : MonoBehaviour
 
     private (Stack<Node> path, float bound)? IdaStar(Node root)
     {
-        var bound = root.Heuristic(settings);
+        var bound = root.h;
         var path = new Stack<Node>();
         path.Push(root);
         while (true)
@@ -57,7 +57,7 @@ public class RubikIDA : MonoBehaviour
     private float Search(Stack<Node> path, float g, float bound)
     {
         var node = path.Peek();
-        var f = g + node.Heuristic(settings);
+        var f = g + node.h;
         if (f > bound) return f;
         if (node.IsGoal()) return Found;
         var successors = node.Successors(settings);

@@ -55,11 +55,6 @@ namespace Rubik
         private void DrawCube()
         {
             string rubik = RubikCube.ToString();
-            Debug.Log(rubik);
-            for (int i = 0; i < 6; i++)
-            {
-                Debug.Log(rubik.Substring(i * 9, 9));
-            }
             for (int i = 0; i < rubik.Length; i++)
             {
                 Color color = Color.black;
