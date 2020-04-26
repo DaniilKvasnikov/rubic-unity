@@ -13,29 +13,44 @@ namespace Rubik
         
         private const int CountElementsRubik = 6 * 9;
         private Dictionary<string, RubikCommand> allCommands;
+
+
+        public HeuristicSettings settings;
+        public IRubikHeuristic Heuristic;
+        public float H;
+        public float Cost(Node successor)
+        {
+            return Heuristic.Cost(this, successor.Rubik);
+        }
+
       
         #region Initializations
 
-        public RubikCube()
+        public RubikCube(HeuristicSettings settings)
         {
-            Init();
+            Init(settings);
             obfuscationCommands = new List<RubikCommand>();
             solutionCommands = new List<RubikCommand>();
             CubeInitialization();
+            Heuristic = RubikHeuristics.GetHeuristic(settings.heuristicType);
+            H =  Heuristic.Heuristic(this, settings);
         }
 
-        public RubikCube(RubikCube copy)
+        public RubikCube(RubikCube copy, HeuristicSettings settings)
         {
-            Init();
+            Init(settings);
             obfuscationCommands = new List<RubikCommand>(copy.obfuscationCommands);
             solutionCommands = new List<RubikCommand>(copy.solutionCommands);
             CubeInitialization(copy.Cube);
+            Heuristic = RubikHeuristics.GetHeuristic(settings.heuristicType);
+            H =  Heuristic.Heuristic(this, settings);
         }
 
         public string Decision => solutionCommands.Aggregate("", (current, command) => current + command);
 
-        private void Init()
+        private void Init(HeuristicSettings settings)
         {
+            this.settings = settings;
             allCommands = new Dictionary<string, RubikCommand>()
             {
                 {"F", new RubikCommand(CommandType.FRONT, false, Front,"F")},
@@ -340,28 +355,15 @@ namespace Rubik
             return cube;
         }
 
-        #region Heuristic
-
-        public float Heuristic(HeuristicSettings settings)
-        {
-            return RubikHeuristics.GetHeuristic(settings.heuristicType).Heuristic(this, settings);
-        }
-
-        public float Cost(Node successor, HeuristicType heuristicType)
-        {
-            return RubikHeuristics.GetHeuristic(heuristicType).Cost(this, successor.Rubik);
-        }
-        
-        #endregion
-
-        public IEnumerable<RubikCube> Successors(HeuristicType heuristicType)
+        public IEnumerable<RubikCube> Successors()
         {
             List<RubikCube> successors = new List<RubikCube>();
 
-            foreach (var command in allCommands)
+            var commands = allCommands;
+            foreach (var command in commands)
             {
                 if (!IsNewSuccessor(command.Value)) continue;
-                var cube = new RubikCube(this);
+                var cube = new RubikCube(this, settings);
                 cube.UseDecision(command.Value.ToString());
                 successors.Add(cube);
             }

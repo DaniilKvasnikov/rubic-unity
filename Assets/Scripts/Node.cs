@@ -5,26 +5,21 @@ using Rubik;
 public class Node
 {
     private readonly RubikCube rubik;
+    private HeuristicSettings settings;
 
-    public float h;
+    public float H => rubik.H;
 
     public Node(RubikCube rubik, HeuristicSettings settings)
     {
         this.rubik = rubik;
-        h =  Rubik.Heuristic(settings);
+        this.settings = settings;
     }
 
     public RubikCube Rubik => rubik;
 
-    public List<Node> Successors(HeuristicSettings settings)
+    public List<Node> Successors()
     {
-        var list = new List<Node>();
-        foreach (RubikCube rubikCube in Rubik.Successors(settings.heuristicType))
-        {
-            var node = new Node(rubikCube, settings);
-            list.Add(node);
-        }
-        return list.OrderBy(e => e.h).ToList();
+        return Rubik.Successors().Select(rubikCube => new Node(rubikCube, settings)).OrderBy(e => e.H).ToList();
     }
 
     public bool IsGoal()
@@ -42,8 +37,8 @@ public class Node
         return Rubik.Decision;
     }
 
-    public float Cost(Node successor, HeuristicType heuristicType)
+    public float Cost(Node successor)
     {
-        return Rubik.Cost(successor, heuristicType);
+        return Rubik.Cost(successor);
     }
 }

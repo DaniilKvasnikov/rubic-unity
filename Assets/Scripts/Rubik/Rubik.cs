@@ -17,8 +17,11 @@ namespace Rubik
         [SerializeField] private Color back = Color.white;
         [SerializeField] private Color down = Color.white;
         
-        public RubikCube RubikCube { get; } = new RubikCube();
-        
+        [SerializeField] public HeuristicSettings settings;
+
+        private RubikCube rubikCube;
+        public RubikCube RubikCube => rubikCube ?? (rubikCube = new RubikCube(settings));
+
         public string Command => command;
         public string Decision { get=> decision; set => decision = value; }
 
