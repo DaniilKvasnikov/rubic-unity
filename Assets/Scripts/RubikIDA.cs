@@ -43,6 +43,7 @@ public class RubikIDA : MonoBehaviour
         
         Debug.Log("Time " + TimeSpan.FromMilliseconds(elapsedMs).TotalSeconds);
         Debug.Log(rubikMonoBehaviour.Decision);
+        Debug.Break();
     }
 
     private (Stack<Node> path, float bound)? IdaStar(Node root)

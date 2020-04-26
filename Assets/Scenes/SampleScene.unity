@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rubikMonoBehaviour: {fileID: 835704629}
-  settings: {fileID: 11400000, guid: c12b4190f60e77f4bb88b5a55bda7d94, type: 2}
+  TimeOut: 20
 --- !u!4 &835704628
 Transform:
   m_ObjectHideFlags: 0
@@ -582,8 +582,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  command: F'UDB'F'L'
-  decision: LBFU'D'F
+  command: L'F'R'L'L'
+  decision: 
   images:
   - {fileID: 303796435}
   - {fileID: 1004139279926123617}
@@ -645,6 +645,7 @@ MonoBehaviour:
   right: {r: 0.10980393, g: 0, b: 0.94117653, a: 1}
   back: {r: 0.8862746, g: 0, b: 0.007843138, a: 1}
   down: {r: 1, g: 1, b: 1, a: 1}
+  settings: {fileID: 11400000, guid: c12b4190f60e77f4bb88b5a55bda7d94, type: 2}
 --- !u!1001 &1051252701
 PrefabInstance:
   m_ObjectHideFlags: 0

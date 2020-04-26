@@ -1,4 +1,7 @@
-﻿namespace Rubik
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Rubik
 {
     public class RubikHeuristicManhattan : IRubikHeuristic
     {
@@ -7,21 +10,14 @@
         public float Heuristic(RubikCube cube, HeuristicSettings settings)
         {
             this.settings = settings.manhattanSettings;
-            float heuristic = 0;
-            var heuristicMap = GetHeuristicMap(cube);
-            for (int i = 0; i < cube.Cube.Length; i++)
-            {
-                heuristic += heuristicMap[i];
-            }
-
-            return heuristic / cube.Cube.Length;
+            return GetHeuristicMap(cube).Sum() / cube.Cube.Length;
         }
 
         public float Cost(RubikCube node, RubikCube successor)
         {
             return settings.Cost;
         }
-
+        
         public static float[] GetHeuristicMap(RubikCube cube)
         {
             float[] heuristicMap = new float[cube.Cube.Length];
