@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -9,13 +10,8 @@ namespace Rubik
     {
         [SerializeField] private string command;
         [SerializeField] private string decision;
-        [SerializeField] private Image[] images;
-        [SerializeField] private Color up = Color.white;
-        [SerializeField] private Color left = Color.white;
-        [SerializeField] private Color front = Color.white;
-        [SerializeField] private Color right = Color.white;
-        [SerializeField] private Color back = Color.white;
-        [SerializeField] private Color down = Color.white;
+        [SerializeField] private SideMiniCube[] miniCubes;
+        [SerializeField] private Dictionary<RubikSide, Color> colors = new Dictionary<RubikSide, Color>();
         
         [SerializeField] public HeuristicSettings settings;
 
@@ -57,25 +53,16 @@ namespace Rubik
 
         private void DrawCube()
         {
-            string rubik = RubikCube.ToString();
-            for (int i = 0; i < rubik.Length; i++)
+            var h = RubikHeuristicManhattan.GetHeuristicMap(RubikCube);
+            for (int i = 0; i < RubikCube.Cube.Length; i++)
             {
-                Color color = Color.black;
-                if (rubik[i] == 'W')
-                    color = up;
-                else if (rubik[i] == 'O')
-                    color = left;
-                else if (rubik[i] == 'G')
-                    color = front;
-                else if (rubik[i] == 'R')
-                    color = right;
-                else if (rubik[i] == 'B')
-                    color = back;
-                else if (rubik[i] == 'Y')
-                    color = down;
-
-                images[i].color = color;
+                miniCubes[i].SetCube(this, RubikCube.Cube[i], h[i]);
             }
+        }
+
+        public Color GetColor(RubikSide rubikInfoSide)
+        {
+            return colors[rubikInfoSide];
         }
     }
 }

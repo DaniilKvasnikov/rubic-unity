@@ -15,6 +15,7 @@ namespace Rubik
             this.settings = settings.stepByStepSettings;
             return RubikHeuristicManhattan.GetHeuristicMap(cube).Sum() / cube.Cube.Length;
         }
+        
         private void StepUpdate(RubikCube cube)
         {
             var map = GetErrorMap(cube);

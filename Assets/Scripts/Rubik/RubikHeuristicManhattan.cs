@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Rubik
 {
@@ -23,13 +24,10 @@ namespace Rubik
             float[] heuristicMap = new float[cube.Cube.Length];
             for (int i = 0; i < cube.Cube.Length; i++)
             {
-                int endFace = cube.Cube[i].num / 9;
-                int endPlace = cube.Cube[i].num % 9;
-                int currFace = i / 9;
-                int currPlace = i % 9;
-                int faceRotate = endFace != currFace ? 1 : 0;
-                int placeRotate = (endPlace != currPlace) ? 1 : 0;
-                heuristicMap[i] = faceRotate + placeRotate;
+                int end = RubikCube.CubeNum(cube.Cube[i].num);
+                int curr = RubikCube.CubeNum(i);
+                Vector3 endV = new Vector3(end / 9 - curr / 9, end % 3 - curr % 3, z: (end % 9) / 3 - (curr % 9) / 3);
+                heuristicMap[i] = endV.magnitude / 4.0f;
             }
 
             return heuristicMap;

@@ -2,18 +2,18 @@
 {
     public class RubikInfo
     {
-        public RubikColor color;
+        public RubikSide side;
         public int num;
 
-        public RubikInfo(RubikColor color, int num)
+        public RubikInfo(RubikSide side, int num)
         {
-            this.color = color;
+            this.side = side;
             this.num = num;
         }
 
         public RubikInfo(RubikInfo rubikInfo)
         {
-            color = rubikInfo.color;
+            side = rubikInfo.side;
             num = rubikInfo.num;
         }
     }

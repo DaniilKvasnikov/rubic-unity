@@ -10,7 +10,7 @@ namespace Rubik
         public RubikInfo[] Cube;
         public List<RubikCommand> obfuscationCommands;
         public List<RubikCommand> solutionCommands;
-        
+
         private const int CountElementsRubik = 6 * 9;
         private Dictionary<string, RubikCommand> allCommands;
 
@@ -18,12 +18,13 @@ namespace Rubik
         public HeuristicSettings settings;
         public IRubikHeuristic Heuristic;
         public float H;
+
         public float Cost(Node successor)
         {
             return Heuristic.Cost(this, successor.Rubik);
         }
 
-      
+
         #region Initializations
 
         public RubikCube(HeuristicSettings settings)
@@ -33,7 +34,7 @@ namespace Rubik
             solutionCommands = new List<RubikCommand>();
             CubeInitialization();
             Heuristic = RubikHeuristics.GetHeuristic(settings.heuristicType);
-            H =  Heuristic.Heuristic(this, settings);
+            H = Heuristic.Heuristic(this, settings);
         }
 
         public RubikCube(RubikCube copy, HeuristicSettings settings)
@@ -43,9 +44,41 @@ namespace Rubik
             solutionCommands = new List<RubikCommand>(copy.solutionCommands);
             CubeInitialization(copy.Cube);
             Heuristic = RubikHeuristics.GetHeuristic(settings.heuristicType);
-            H =  Heuristic.Heuristic(this, settings);
+            H = Heuristic.Heuristic(this, settings);
         }
 
+        private static readonly int[] CubeMap =
+        {
+            0,1,2,
+            3,4,5,
+            6,7,8,
+            
+            0,3,6,
+            9,12,15,
+            18,21,24,
+            
+            6,7,8,
+            15,16,17,
+            24,25,26,
+            
+            8,5,2,
+            17,14,11,
+            26,23,20,
+            
+            2,1,0,
+            11,10,9,
+            20,19,18,
+            
+            24,25,26,
+            21,22,23,
+            18,19,20,
+        };
+
+        public static int CubeNum(int num)
+        {
+            return CubeMap[num];
+        }
+        
         public string Decision => solutionCommands.Aggregate("", (current, command) => current + command);
 
         private void Init(HeuristicSettings settings)
@@ -322,22 +355,22 @@ namespace Rubik
 
         #region Private functions
 
-        private RubikColor GetColorByInt(int i)
+        private RubikSide GetColorByInt(int i)
         {
             switch (i)
             {
                 case 0:
-                    return RubikColor.WHITE;
+                    return RubikSide.UP;
                 case 1:
-                    return RubikColor.ORANGE;
+                    return RubikSide.LEFT;
                 case 2:
-                    return RubikColor.GREEN;
+                    return RubikSide.FRONT;
                 case 3:
-                    return RubikColor.RED;
+                    return RubikSide.RIGHT;
                 case 4:
-                    return RubikColor.BLUE;
+                    return RubikSide.BACK;
                 case 5:
-                    return RubikColor.YELLOW;
+                    return RubikSide.DOWN;
             }
             throw new Exception("Unknown color");
         }
@@ -349,7 +382,7 @@ namespace Rubik
             string cube = "";
             foreach (var color in Cube)
             {
-                cube += color.color.ToString()[0];
+                cube += color.side.ToString()[0];
             }
 
             return cube;
