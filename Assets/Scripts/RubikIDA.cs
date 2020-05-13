@@ -1,51 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Rubik;
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using UnityEngine;
-using System.Threading.Tasks;
 
 public class RubikIDA : MonoBehaviour
 {
-    private float Found { get; } = float.NaN;
+    private static float Found { get; } = float.NaN;
     
-    private bool IsFound(float t)
+    private static bool IsFound(float t)
     {
         return float.IsNaN(t);
     }
     
-    [SerializeField] private Rubik.Rubik rubikMonoBehaviour;
-    [SerializeField] private float TimeOut = 10f;
-
-    [Button]
-    public void RunTest()
-    {
-        var rubik = new RubikCube(rubikMonoBehaviour.settings);
-        rubik.UseCommand(rubikMonoBehaviour.Command);
-        var node = new Node(rubik, rubikMonoBehaviour.settings);
-        
-        Debug.Log("Start ida");
-        var watch = System.Diagnostics.Stopwatch.StartNew();
-        
-        var task = Task.Run(() => IdaStar(node));
-        if (!task.Wait(TimeSpan.FromSeconds(TimeOut)))
-            throw new Exception("Timed out");
-
-        watch.Stop();
-        var elapsedMs = watch.ElapsedMilliseconds;
-        
-        var idaResults = task.Result;
-        if (idaResults == null) return;
-        
-        rubikMonoBehaviour.Decision = idaResults.Value.path.ToArray()[0].Command();
-        
-        Debug.Log("Time " + TimeSpan.FromMilliseconds(elapsedMs).TotalSeconds);
-        Debug.Log(rubikMonoBehaviour.Decision);
-    }
-
-    private (Stack<Node> path, float bound)? IdaStar(Node root)
+    public static (Stack<Node> path, float bound)? IdaStar(Node root)
     {
         var bound = root.H;
         var path = new Stack<Node>();
@@ -59,7 +25,7 @@ public class RubikIDA : MonoBehaviour
         }
     }
 
-    private float Search(Stack<Node> path, float g, float bound)
+    private static float Search(Stack<Node> path, float g, float bound)
     {
         var node = path.Peek();
         var f = g + node.H;

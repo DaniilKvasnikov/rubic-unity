@@ -27,9 +27,18 @@ namespace Rubik
 
         #region Initializations
 
+        public RubikCube()
+        {
+            Init();
+            obfuscationCommands = new List<RubikCommand>();
+            solutionCommands = new List<RubikCommand>();
+            CubeInitialization();
+        }
+
         public RubikCube(HeuristicSettings settings)
         {
-            Init(settings);
+            this.settings = settings;
+            Init();
             obfuscationCommands = new List<RubikCommand>();
             solutionCommands = new List<RubikCommand>();
             CubeInitialization();
@@ -39,7 +48,8 @@ namespace Rubik
 
         public RubikCube(RubikCube copy, HeuristicSettings settings)
         {
-            Init(settings);
+            this.settings = settings;
+            Init();
             obfuscationCommands = new List<RubikCommand>(copy.obfuscationCommands);
             solutionCommands = new List<RubikCommand>(copy.solutionCommands);
             CubeInitialization(copy.Cube);
@@ -81,9 +91,8 @@ namespace Rubik
         
         public string Decision => solutionCommands.Aggregate("", (current, command) => current + command);
 
-        private void Init(HeuristicSettings settings)
+        private void Init()
         {
-            this.settings = settings;
             allCommands = new Dictionary<string, RubikCommand>()
             {
                 {"F", new RubikCommand(CommandType.FRONT, false, Front,"F")},
