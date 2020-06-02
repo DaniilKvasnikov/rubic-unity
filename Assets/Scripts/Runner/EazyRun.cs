@@ -16,7 +16,7 @@ public class EazyRun : MonoBehaviour
     public void RunTest()
     {
         var rubik = new RubikCube(settings);
-        rubik.UseCommand(rubikMonoBehaviour.command);
+        rubik.UseCommand(rubikMonoBehaviour.Command);
         var node = new Node(rubik, settings);
         
         Debug.Log("Start ida");
@@ -32,9 +32,9 @@ public class EazyRun : MonoBehaviour
         var idaResults = task.Result;
         if (idaResults == null) return;
         
-        rubikMonoBehaviour.decision = idaResults.Value.path.ToArray()[0].Command();
+        rubikMonoBehaviour.Decision = idaResults.Value.path.ToArray()[0].Command();
         
         Debug.Log("Time " + TimeSpan.FromMilliseconds(elapsedMs).TotalSeconds);
-        Debug.Log(rubikMonoBehaviour.decision);
+        Debug.Log(rubikMonoBehaviour.Decision);
     }
 }

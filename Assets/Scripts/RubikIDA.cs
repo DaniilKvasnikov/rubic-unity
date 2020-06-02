@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Rubik;
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 
 public class RubikIDA : MonoBehaviour
@@ -11,6 +15,31 @@ public class RubikIDA : MonoBehaviour
         return float.IsNaN(t);
     }
     
+    [SerializeField] private Rubik.Rubik rubikMonoBehaviour;
+    [SerializeField] private HeuristicSettings settings;
+
+    [Button]
+    public void RunTest()
+    {
+        var rubik = new RubikCube();
+        rubik.UseCommand(rubikMonoBehaviour.Command);
+        var node = new Node(rubik, settings);
+        
+        Debug.Log("Start ida");
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        
+        var idaResults = IdaStar(node);
+        
+        watch.Stop();
+        var elapsedMs = watch.ElapsedMilliseconds;
+        
+        if (idaResults == null) return;
+        rubikMonoBehaviour.Decision = idaResults.Value.path.ToArray()[0].Command();
+        Debug.Log("Time " + TimeSpan.FromMilliseconds(elapsedMs).TotalSeconds);
+        Debug.Log(idaResults.Value.bound);
+        Debug.Log(rubikMonoBehaviour.Decision);
+    }
+
     public static (Stack<Node> path, float bound)? IdaStar(Node root)
     {
         var bound = root.H;

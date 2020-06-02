@@ -25,7 +25,7 @@ public class RubikVisualization : SerializedMonoBehaviour
     private void MixUpCube()
     {
         ResetCube();
-        RubikCube.UseCommand(rubik.command);
+        RubikCube.UseCommand(rubik.Command);
         DrawCube();
     }
 
@@ -33,14 +33,14 @@ public class RubikVisualization : SerializedMonoBehaviour
     private void UseDecision()
     {
         MixUpCube();
-        RubikCube.UseDecision(rubik.decision);
+        RubikCube.UseDecision(rubik.Decision);
         DrawCube();
     }
 
     [Button]
     public void RandomCommand(int len)
     {
-        rubik.command = RubikCube.GetRandomCommands(len);
+        rubik.Command = RubikCube.GetRandomCommands(len);
     }
     
     private void DrawCube()
