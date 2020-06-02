@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -19,8 +20,22 @@ namespace Rubik
         
         public RubikCube RubikCube { get; } = new RubikCube();
         
-        public string Command => command;
-        public string Decision { get=> decision; set => decision = value; }
+        public string Command
+        {
+            get => command;
+            set => command = value;
+        }
+
+        public string Decision
+        { 
+            get=> decision;
+            set => decision = value;
+        }
+
+        private void OnEnable()
+        {
+            ResetCube();
+        }
 
         [Button]
         public void ResetCube()
@@ -30,7 +45,7 @@ namespace Rubik
         }
 
         [Button]
-        private void MixUpCube()
+        public void MixUpCube()
         {
             ResetCube();
             RubikCube.UseCommand(command);
@@ -38,7 +53,7 @@ namespace Rubik
         }
 
         [Button]
-        private void UseDecision()
+        public void UseDecision()
         {
             MixUpCube();
             RubikCube.UseDecision(decision);
