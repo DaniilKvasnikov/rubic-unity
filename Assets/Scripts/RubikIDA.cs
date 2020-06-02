@@ -8,9 +8,9 @@ using UnityEngine;
 
 public class RubikIDA : MonoBehaviour
 {
-    private float Found { get; } = float.NaN;
+    private static float Found { get; } = float.NaN;
     
-    private bool IsFound(float t)
+    private static bool IsFound(float t)
     {
         return float.IsNaN(t);
     }
@@ -23,7 +23,7 @@ public class RubikIDA : MonoBehaviour
     {
         var rubik = new RubikCube();
         rubik.UseCommand(rubikMonoBehaviour.Command);
-        var node = new Node(rubik);
+        var node = new Node(rubik, settings);
         
         Debug.Log("Start ida");
         var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -40,9 +40,9 @@ public class RubikIDA : MonoBehaviour
         Debug.Log(rubikMonoBehaviour.Decision);
     }
 
-    private (Stack<Node> path, float bound)? IdaStar(Node root)
+    public static (Stack<Node> path, float bound)? IdaStar(Node root)
     {
-        var bound = root.Heuristic(settings);
+        var bound = root.H;
         var path = new Stack<Node>();
         path.Push(root);
         while (true)
@@ -54,18 +54,18 @@ public class RubikIDA : MonoBehaviour
         }
     }
 
-    private float Search(Stack<Node> path, float g, float bound)
+    private static float Search(Stack<Node> path, float g, float bound)
     {
         var node = path.Peek();
-        var f = g + node.Heuristic(settings);
+        var f = g + node.H;
         if (f > bound) return f;
         if (node.IsGoal()) return Found;
-        var successors = node.Successors(settings);
+        var successors = node.Successors();
         var min = float.PositiveInfinity;
         foreach (var successor in successors.Where(successor => !path.Contains(successor)))
         {
             path.Push(successor);
-            var t = Search(path, g + node.Cost(successor, settings.heuristicType), bound);
+            var t = Search(path, g + node.Cost(successor), bound);
             if (IsFound(t)) return Found;
             if (t < min) min = t;
             path.Pop();
