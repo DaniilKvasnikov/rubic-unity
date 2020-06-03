@@ -18,6 +18,14 @@ public class RubikIDA : MonoBehaviour
     [SerializeField] private Rubik.Rubik rubikMonoBehaviour;
     [SerializeField] private HeuristicSettings settings;
 
+    private float timeout = 10f;
+
+    public void SetTimeout(float newTimeout)
+    {
+        timeout = newTimeout;
+        Debug.Log(timeout);
+    }
+
     [Button]
     public void RunTest()
     {

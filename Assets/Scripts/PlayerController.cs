@@ -1,4 +1,7 @@
-﻿using TMPro;
+﻿using System;
+using System.Linq;
+using Rubik;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +13,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Button mixRubikButton;
     [SerializeField] private Button useDecisionButton;
     [SerializeField] private Button solveRubikButton;
+    [SerializeField] private TMP_InputField timeout;
+    [SerializeField] private TMP_Dropdown settings;
     [SerializeField] private RubikIDA ida;
 
+    [SerializeField] private HeuristicSettings heuristicSettings;
+    
     [SerializeField] private Rubik.Rubik rubik;
 
     private void OnEnable()
@@ -21,6 +28,23 @@ public class PlayerController : MonoBehaviour
         mixRubikButton.onClick.AddListener(MixRubik);
         useDecisionButton.onClick.AddListener(UseDecision);
         solveRubikButton.onClick.AddListener(SolveRubik);
+        settings.AddOptions(Enum.GetNames(typeof(HeuristicType)).ToList());
+        
+        settings.onValueChanged.AddListener(ChangedSettings);
+        heuristicSettings.heuristicType = (HeuristicType) 0;
+        
+        timeout.onEndEdit.AddListener(TimeoutChanged);
+    }
+
+    private void TimeoutChanged(string arg0)
+    {
+        if (float.TryParse(arg0, out float timeout))
+            ida.SetTimeout(timeout);
+    }
+
+    private void ChangedSettings(int numSettings)
+    {
+        heuristicSettings.heuristicType = (HeuristicType) numSettings;
     }
 
     private void OnDisable()
@@ -30,6 +54,10 @@ public class PlayerController : MonoBehaviour
         mixRubikButton.onClick.RemoveListener(MixRubik);
         useDecisionButton.onClick.RemoveListener(UseDecision);
         solveRubikButton.onClick.RemoveListener(SolveRubik);
+        
+        heuristicSettings.heuristicType = (HeuristicType) 0;
+        
+        timeout.onValueChanged.RemoveListener(TimeoutChanged);
     }
 
     private void ResetRubik()

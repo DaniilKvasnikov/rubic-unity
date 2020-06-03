@@ -4,9 +4,9 @@ namespace Rubik
 {
     public enum HeuristicType
     {
-        OnPlace,
-        Manhattan,
-        StepByStep,
+        OnPlace = 0,
+        Manhattan = 1,
+        StepByStep = 2,
     }
     
     public static class RubikHeuristics
