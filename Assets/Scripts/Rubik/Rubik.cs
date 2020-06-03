@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,12 +12,7 @@ namespace Rubik
         [SerializeField] private string command;
         [SerializeField] private string decision;
         [SerializeField] private Image[] images;
-        [SerializeField] private Color up = Color.white;
-        [SerializeField] private Color left = Color.white;
-        [SerializeField] private Color front = Color.white;
-        [SerializeField] private Color right = Color.white;
-        [SerializeField] private Color back = Color.white;
-        [SerializeField] private Color down = Color.white;
+        [SerializeField] private Dictionary<RubikSide, Color> colors;
         
         public RubikCube RubikCube { get; } = new RubikCube();
         
@@ -29,6 +26,11 @@ namespace Rubik
         {
             get=> decision;
             set => decision = value;
+        }
+
+        private void OnEnable()
+        {
+            ResetCube();
         }
 
         [Button]
@@ -47,7 +49,7 @@ namespace Rubik
         }
 
         [Button]
-        private void UseDecision()
+        public void UseDecision()
         {
             MixUpCube();
             RubikCube.UseDecision(decision);
@@ -63,29 +65,9 @@ namespace Rubik
 
         private void DrawCube()
         {
-            string rubik = RubikCube.ToString();
-            Debug.Log(rubik);
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < RubikCube.Cube.Length; i++)
             {
-                Debug.Log(rubik.Substring(i * 9, 9));
-            }
-            for (int i = 0; i < rubik.Length; i++)
-            {
-                Color color = Color.black;
-                if (rubik[i] == 'W')
-                    color = up;
-                else if (rubik[i] == 'O')
-                    color = left;
-                else if (rubik[i] == 'G')
-                    color = front;
-                else if (rubik[i] == 'R')
-                    color = right;
-                else if (rubik[i] == 'B')
-                    color = back;
-                else if (rubik[i] == 'Y')
-                    color = down;
-
-                images[i].color = color;
+                images[i].color = colors[RubikCube.Cube[i].side];
             }
         }
     }

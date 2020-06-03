@@ -21,7 +21,7 @@ public class RubikIDA : MonoBehaviour
     [Button]
     public void RunTest()
     {
-        var rubik = new RubikCube();
+        var rubik = new RubikCube(settings);
         rubik.UseCommand(rubikMonoBehaviour.Command);
         var node = new Node(rubik, settings);
         
