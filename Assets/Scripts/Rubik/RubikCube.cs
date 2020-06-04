@@ -162,6 +162,7 @@ namespace Rubik
 
         private string CorrectCommand(string command)
         {
+            command = command.Replace("2'", "2");
             command = command.Replace(" ", "");
             if (command.Length == 0) return command;
             string newCommand = command[0].ToString();

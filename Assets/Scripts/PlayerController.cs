@@ -77,16 +77,12 @@ public class PlayerController : MonoBehaviour
 
     private void SolveRubik()
     {
-        ida.RunTest();
+        decision.text = "In progress";
+        decision.text = ida.RunTest();
     }
 
     private void UpdateCommand(string commandStr)
     {
         rubik.Command = commandStr;
-    }
-
-    private void FixedUpdate()
-    {
-        decision.text = rubik.Decision;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Rubik;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
@@ -27,7 +28,7 @@ public class RubikIDA : MonoBehaviour
     }
 
     [Button]
-    public void RunTest()
+    public string RunTest()
     {
         var rubik = new RubikCube(settings);
         rubik.UseCommand(rubikMonoBehaviour.Command);
@@ -36,16 +37,21 @@ public class RubikIDA : MonoBehaviour
         Debug.Log("Start ida");
         var watch = System.Diagnostics.Stopwatch.StartNew();
         
-        var idaResults = IdaStar(node);
+        var task = Task.Run(() => IdaStar(node));
+        if (!task.Wait(TimeSpan.FromSeconds(timeout)))
+            return "Timed out";
+
+        var idaResults = task.Result;
         
         watch.Stop();
         var elapsedMs = watch.ElapsedMilliseconds;
         
-        if (idaResults == null) return;
+        if (idaResults == null) return "Not found";
         rubikMonoBehaviour.Decision = idaResults.Value.path.ToArray()[0].Command();
         Debug.Log("Time " + TimeSpan.FromMilliseconds(elapsedMs).TotalSeconds);
         Debug.Log(idaResults.Value.bound);
         Debug.Log(rubikMonoBehaviour.Decision);
+        return rubikMonoBehaviour.Decision;
     }
 
     public static (Stack<Node> path, float bound)? IdaStar(Node root)
